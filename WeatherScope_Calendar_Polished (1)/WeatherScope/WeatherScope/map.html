@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07182f">
+  <title>Weather Map | WeatherScope</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="map.css">
+
+  <!-- Leaflet interactive map library -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+  <script
+    defer
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  ></script>
+  <script defer src="map.js"></script>
+</head>
+
+<body class="weather-map-page">
+  <header class="map-header">
+    <a class="map-brand" href="index.html">
+      <span class="map-brand-icon">☀️</span>
+      Weather<span>Scope</span>
+    </a>
+
+<nav class="map-nav">
+  <a href="index.html">Home</a>
+  <a href="app.html">Weather App</a>
+  <a href="map.html" class="active">Weather Map</a>
+  <button class="theme-toggle" id="theme-toggle"
+        type="button" aria-label="Switch color theme">
+  <span class="theme-icon">☀️</span>
+  <span class="theme-label">Dark mode</span>
+</button>
+</nav>
+  </header>
+
+  <main class="map-main">
+    <section class="map-intro">
+      <span class="map-eyebrow">EXPLORE THE WEATHER</span>
+      <h1>Weather, <span>on the map.</span></h1>
+      <p>
+        Explore locations, compare temperatures, and check the forecast
+        around the world.
+      </p>
+    </section>
+
+    <section class="map-dashboard">
+      <div class="map-toolbar">
+        <form id="map-search-form" class="map-search">
+          <label class="visually-hidden" for="map-city-input">
+            Search for a city
+          </label>
+          <span aria-hidden="true">⌕</span>
+          <input
+            id="map-city-input"
+            type="search"
+            placeholder="Search a city, e.g. Manila"
+            minlength="2"
+            required
+          >
+          <button id="map-search-button" type="submit">Search</button>
+        </form>
+
+        <label class="map-date-control" for="map-date">
+          <span>Forecast date</span>
+          <input id="map-date" type="date" required>
+        </label>
+      </div>
+
+      <p id="map-status" class="map-status" role="status" aria-live="polite">
+        Loading the weather map…
+      </p>
+
+      <div class="map-layout">
+        <div class="map-frame">
+          
+<div id="weather-map" aria-label="Interactive weather map"></div>
+
+<div class="radar-info">
+  <strong>🌧️ Rain Radar</strong>
+  <span class="radar-scale">
+    <span class="radar-color light-rain"></span> Light
+    <span class="radar-color moderate-rain"></span> Moderate
+    <span class="radar-color heavy-rain"></span> Heavy
+  </span>
+  <span id="radar-timestamp">Radar time: loading…</span>
+</div>
+
+<div class="map-legend">
+
+            <span class="legend-dot"></span>
+            Weather location
+            <span class="legend-note">Click anywhere on the map</span>
+          </div>
+        </div>
+
+        <aside class="map-weather-card" aria-live="polite">
+          <div class="map-card-top">
+            <span class="map-card-label">SELECTED LOCATION</span>
+            <span id="map-weather-icon" class="map-weather-icon">🌤️</span>
+          </div>
+
+          <h2 id="map-location-name">Choose a location</h2>
+          <p id="map-location-coordinates" class="map-coordinates">
+            Click the map or search for a city
+          </p>
+
+          <div class="map-temperature" id="map-temperature">--°</div>
+          <p id="map-condition" class="map-condition">
+            Weather information will appear here.
+          </p>
+
+          <div class="map-weather-stats">
+            <div class="map-stat">
+              <span>Feels like</span>
+              <strong id="map-feels-like">--°</strong>
+            </div>
+            <div class="map-stat">
+              <span>Humidity</span>
+              <strong id="map-humidity">--%</strong>
+            </div>
+            <div class="map-stat">
+              <span>Wind</span>
+              <strong id="map-wind">-- km/h</strong>
+            </div>
+            <div class="map-stat">
+              <span>Rain chance</span>
+              <strong id="map-rain">--%</strong>
+            </div>
+          </div>
+
+          <p class="map-source">
+            Forecast data provided by
+            <a href="https://open-meteo.com/" target="_blank"
+               rel="noopener noreferrer">Open-Meteo</a>.
+          </p>
+        </aside>
+      </div>
+
+      <section class="map-forecast-section">
+        <div class="map-forecast-heading">
+          <div>
+            <span class="map-eyebrow">DAILY OUTLOOK</span>
+            <h2>Forecast for the selected location</h2>
+          </div>
+          <span id="map-forecast-date-label" class="forecast-date-label">
+            Select a date
+          </span>
+        </div>
+
+        <div id="map-daily-forecast" class="map-daily-forecast">
+          <p>Search for a city to load its forecast.</p>
+        </div>
+      </section>
+    </section>
+
+    <p class="map-disclaimer">
+      This page displays forecast data, not live radar imagery.
+      Map tiles and weather data require an internet connection.
+    </p>
+  </main>
+</body>
+</html>

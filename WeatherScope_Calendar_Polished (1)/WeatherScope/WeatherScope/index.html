@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the team behind WeatherScope, a weather tracker powered by Open-Meteo.">
+  <title>WeatherScope | Our Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="portfolio-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="WeatherScope home">
+      <span class="brand-icon" aria-hidden="true">☀️</span>
+      <span>Weather<span class="brand-accent">Scope</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="#about">About</a>
+      <a href="#team">Our Team</a>
+      <a href="map.html">Weather Map</a>
+      <a class="nav-cta" href="app.html">Open Weather App <span aria-hidden="true">↗</span></a>
+      <button class="theme-toggle" id="theme-toggle"
+        type="button" aria-label="Switch color theme">
+  <span class="theme-icon">☀️</span>
+  <span class="theme-label">Dark mode</span>
+</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="portfolio-hero" id="about">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> IT 110 · MIDTERM PROJECT</span>
+        <h1>Weather changes.<br><span class="gradient-text">Stay one step ahead.</span></h1>
+        <p class="hero-description">Meet WeatherScope, a simple and colorful weather tracker that helps you explore current conditions and the forecast for cities around the world.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="app.html">Explore the weather <span aria-hidden="true">→</span></a>
+          <a class="button button-secondary" href="#team">Meet the team</a>
+        </div>
+        <div class="hero-note"><span aria-hidden="true">🌤️</span> Weather data powered by Open-Meteo</div>
+      </div>
+      <div class="hero-art" aria-label="Illustration of the sun, clouds, and rain">
+        <div class="orbit orbit-one"></div>
+        <div class="orbit orbit-two"></div>
+        <div class="sun-art">☀️</div>
+        <div class="cloud-art cloud-one">☁️</div>
+        <div class="cloud-art cloud-two">🌧️</div>
+        <div class="floating-pill pill-top">Live weather <span>●</span></div>
+        <div class="floating-pill pill-bottom">Made for curious minds ✨</div>
+      </div>
+    </section>
+
+    <section class="section-block project-section">
+      <div class="section-heading">
+        <span class="eyebrow">THE PROJECT</span>
+        <h2>A clearer view of the weather.</h2>
+        <p>WeatherScope turns public weather data into an easy-to-understand dashboard.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card feature-blue">
+          <div class="feature-icon">🌍</div>
+          <h3>Search any city</h3>
+          <p>Find locations and load their weather using the Open-Meteo geocoding service.</p>
+        </article>
+        <article class="feature-card feature-orange">
+          <div class="feature-icon">🌡️</div>
+          <h3>Current conditions</h3>
+          <p>View temperature, feels-like temperature, humidity, wind speed, and conditions.</p>
+        </article>
+        <article class="feature-card feature-purple">
+          <div class="feature-icon">📅</div>
+          <h3>Plan ahead</h3>
+          <p>Check a five-day forecast and see how the weather may change over the week.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block team-section" id="team">
+      <div class="section-heading">
+        <span class="eyebrow">THE PEOPLE BEHIND IT</span>
+        <h2>Meet our team</h2>
+        <p>Three collaborators bringing the project to life.</p>
+      </div>
+      <div class="team-grid">
+        <article class="team-card">
+          <img src="images/member1.png" alt="Lean">
+          <span class="team-role">HTML & STRUCTURE</span>
+          <h3>Ms. Lean Morandante</h3>
+          <p>Builds the semantic page structure, portfolio content, and accessible interface elements.</p>
+        </article>
+        <article class="team-card">
+          <img src="images/member2.jpg" alt="Christen">
+          <span class="team-role">CSS & DESIGN</span>
+          <h3>Ms. Christen Dadios</h3>
+          <p>Creates the visual identity, responsive layouts, and colorful weather-inspired styling.</p>
+        </article>
+        <article class="team-card">
+          <img src="images/member3.jpg" alt="Hazel">
+          <span class="team-role">JAVASCRIPT & API</span>
+          <h3>Ms. Hazel Negros</h3>
+          <p>Connects the app to Open-Meteo, handles responses, and displays weather information.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-panel">
+      <div>
+        <span class="eyebrow">READY TO CHECK THE FORECAST?</span>
+        <h2>Your next destination starts here.</h2>
+        <p>Search for a city and discover its current weather.</p>
+      </div>
+      <a class="button button-light" href="app.html">Launch WeatherScope <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">☀️</span><span>Weather<span class="brand-accent">Scope</span></span></a>
+    <p>IT 110 Midterm Project · Weather data from Open-Meteo</p>
+  </footer>
+
+<script>
+(() => {
+  const button = document.getElementById("theme-toggle");
+  const storageKey = "weatherscope-theme";
+
+  function applyTheme(theme) {
+    document.body.classList.toggle("dark-mode", theme === "dark");
+
+    if (!button) return;
+
+    const icon = button.querySelector(".theme-icon");
+    const label = button.querySelector(".theme-label");
+
+    if (icon) icon.textContent = theme === "dark" ? "🌙" : "☀️";
+    if (label) label.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+
+    const floatingSun = document.querySelector(".sun-art");
+
+    document.querySelectorAll(".brand-icon").forEach((icon) => {
+     icon.textContent = theme === "dark" ? "🌙" : "☀️";
+    });
+
+if (floatingSun) {
+  floatingSun.textContent = theme === "dark" ? "🌙" : "☀️";
+}
+
+    button.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
+
+  let savedTheme = "light";
+
+  try {
+    savedTheme = localStorage.getItem(storageKey) === "dark"
+      ? "dark"
+      : "light";
+  } catch (error) {}
+
+  applyTheme(savedTheme);
+
+  button?.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("dark-mode")
+      ? "light"
+      : "dark";
+
+    try {
+      localStorage.setItem(storageKey, nextTheme);
+    } catch (error) {}
+
+    applyTheme(nextTheme);
+  });
+})();
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search a city and explore current weather and a five-day forecast with WeatherScope.">
+  <title>WeatherScope | Weather Calendar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body class="app-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Back to WeatherScope team portfolio">
+      <span class="brand-icon" aria-hidden="true">☀️</span>
+      <span>Weather<span class="brand-accent">Scope</span></span>
+    </a>
+   <nav class="main-nav" aria-label="Main navigation">
+  <a href="index.html">Our Team</a>
+  <a class="nav-cta" href="#weather-search">Check Weather <span aria-hidden="true">↘</span></a>
+  <button class="theme-toggle" id="theme-toggle"
+        type="button" aria-label="Switch color theme">
+  <span class="theme-icon">☀️</span>
+  <span class="theme-label">Dark mode</span>
+</button>
+</nav>
+
+  </header>
+
+  <main class="weather-main">
+    <section class="weather-intro weather-intro-compact">
+      <span class="eyebrow"><span class="eyebrow-dot"></span> LIVE CONDITIONS & FORECAST</span>
+      <h1>Your weather, <span class="gradient-text">all month.</span></h1>
+      <p>Search a city to explore current conditions and a calendar-style forecast.</p>
+    </section>
+
+    <section class="weather-dashboard" aria-label="Weather dashboard">
+      <form class="search-form" id="weather-search">
+        <label class="sr-only" for="city-input">Enter a city or location</label>
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="city-input" name="city" type="search" placeholder="Search a city (e.g. Surigao City)" minlength="2" required autocomplete="off">
+        <button class="button button-primary search-button" type="submit" id="search-button">Search <span aria-hidden="true">→</span></button>
+      </form>
+      <div class="search-hint">Try: Manila, Cebu City, Tokyo, London, or New York</div>
+      
+<div class="status-message" id="status-message" role="status" aria-live="polite">
+  <span class="loading-spinner" id="loading-spinner" aria-hidden="true" hidden></span>
+  <span id="status-text">Loading the default location…</span>
+</div>
+
+
+      <section class="current-weather weather-card" id="current-weather" aria-label="Current weather" hidden>
+        <div class="current-weather-top">
+          <div>
+            <span class="eyebrow">CURRENT WEATHER</span>
+            <h2 id="location-name">Surigao City</h2>
+            <p id="location-details" class="muted-text">Philippines</p>
+            <p id="current-date" class="muted-text"></p>
+          </div>
+          <div class="weather-symbol" id="current-icon" aria-hidden="true">🌤️</div>
+        </div>
+        <div class="temperature-row">
+          <div class="temperature" id="current-temperature">--°</div>
+          <div class="condition-copy">
+            <h3 id="current-condition">Getting conditions…</h3>
+            <p>Feels like <strong id="feels-like">--°</strong></p>
+          </div>
+          <label class="unit-toggle" for="unit-select">Units
+            <select id="unit-select" aria-label="Temperature unit">
+              <option value="celsius">°C</option>
+              <option value="fahrenheit">°F</option>
+            </select>
+          </label>
+        </div>
+        <div class="weather-stats">
+          <article class="stat-card"><span class="stat-icon">💧</span><span class="stat-label">Humidity</span><strong id="humidity">--%</strong></article>
+          <article class="stat-card"><span class="stat-icon">💨</span><span class="stat-label">Wind speed</span><strong id="wind-speed">-- km/h</strong></article>
+          <article class="stat-card"><span class="stat-icon">🌡️</span><span class="stat-label">Feels like</span><strong id="feels-stat">--°</strong></article>
+        </div>
+      </section>
+
+      <!-- Temperature Chart -->
+  <section class="insights-grid" aria-label="Weather insights">
+    <article class="insight-panel temperature-chart-panel">
+      <div class="insight-heading">
+        <div>
+          <span class="insight-kicker">TEMPERATURE TRENDS</span>
+          <h2>Temperature Forecast</h2>
+          <p>Daily high and low temperatures for the next 7 days.</p>
+        </div>
+      </div>
+
+      <div class="chart-legend">
+        <span><i class="legend-line high-line"></i> High</span>
+        <span><i class="legend-line low-line"></i> Low</span>
+      </div>
+
+      <div id="temperature-chart" class="temperature-chart" role="img" aria-label="Seven-day high and low temperature chart">
+        <p class="insight-empty">Search for a city to view its temperature chart.</p>
+      </div>
+    </article>
+
+    <!-- Forecast-based Weather Notices -->
+    <article class="insight-panel alerts-panel">
+      <div class="insight-heading">
+        <div>
+          <span class="insight-kicker">WEATHER CONDITIONS</span>
+          <h2>Official Weather Alerts</h2>
+          <p>Potentially important conditions in the forecast.</p>
+        </div>
+        <span class="alert-status-dot" aria-hidden="true"></span>
+      </div>
+
+      <div id="weather-alerts" class="weather-alerts" aria-live="polite">
+        <p class="insight-empty">Search for a city to check its forecast.</p>
+      </div>
+
+      <p class="alert-disclaimer">
+           Official information is provided by PAGASA. Open the source links
+           to check the latest warnings and affected areas. This panel does
+            not automatically retrieve live alerts.
+      </p>
+    </article>
+  </section>
+
+      <section class="forecast-section" id="forecast-section" aria-label="Monthly weather calendar" hidden>
+        <div class="forecast-heading calendar-heading">
+          <div><span class="eyebrow">PLAN AHEAD</span><h2>Weather calendar</h2><p class="calendar-note">Past dates are muted because this view shows forecasts, not historical weather. Future dates outside Open-Meteo’s forecast range are marked unavailable.</p></div>
+          <div class="calendar-month-control"><button type="button" id="month-prev" aria-label="Previous month">‹</button><strong id="calendar-month">This month</strong><button type="button" id="month-next" aria-label="Next month">›</button><button type="button" id="month-today" class="month-today-button">Today</button></div>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+        <div class="calendar-grid" id="forecast-grid"></div>
+        <section class="selected-date-panel" id="selected-date-panel" aria-live="polite" aria-label="Selected date details">
+          <div class="selected-date-icon" id="selected-date-icon" aria-hidden="true">📅</div>
+          <div class="selected-date-copy"><span class="selected-date-kicker">SELECTED DATE</span><h3 id="selected-date-title">Choose a date</h3><p id="selected-date-description">Select a calendar day to see its forecast status.</p></div>
+          <div class="selected-date-temperatures" id="selected-date-temperatures"></div>
+        </section>
+        <div class="calendar-legend"><span><i class="legend-dot available"></i> Forecast available</span><span><i class="legend-dot past"></i> Past date (no history)</span><span><i class="legend-dot unavailable"></i> Future date outside forecast range</span></div>
+      </section>
+      <p class="data-credit">Weather data provided by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a>. Location results are based on GeoNames.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="index.html"><span class="brand-icon" aria-hidden="true">☀️</span><span>Weather<span class="brand-accent">Scope</span></span></a>
+    <p>Built with HTML, CSS, JavaScript, and public APIs.</p>
+  </footer>
+
+<script>
+(() => {
+  const button = document.getElementById("theme-toggle");
+  const storageKey = "weatherscope-theme";
+
+  function applyTheme(theme) {
+    document.body.classList.toggle("dark-mode", theme === "dark");
+
+    if (!button) return;
+
+    const icon = button.querySelector(".theme-icon");
+    const label = button.querySelector(".theme-label");
+
+    if (icon) icon.textContent = theme === "dark" ? "🌙" : "☀️";
+    if (label) label.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+
+    button.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
+
+  let savedTheme = "light";
+
+  try {
+    savedTheme = localStorage.getItem(storageKey) === "dark"
+      ? "dark"
+      : "light";
+  } catch (error) {}
+
+  applyTheme(savedTheme);
+
+  button?.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("dark-mode")
+      ? "light"
+      : "dark";
+
+    try {
+      localStorage.setItem(storageKey, nextTheme);
+    } catch (error) {}
+
+    applyTheme(nextTheme);
+  });
+})();
+</script>
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top"
+        type="button" aria-label="Back to top"
+        title="Back to top">
+  ↑
+</button>
+</body>
+</html>
+
+
